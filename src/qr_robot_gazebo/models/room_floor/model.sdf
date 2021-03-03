@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='room_floor'>
+    <static>true</static>
+    <link name="link">
+      <visual name="visual">
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <box>
+            <size>9 7.25 0.005</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://room_floor/materials/scripts</uri>
+            <uri>model://room_floor/materials/textures</uri>
+            <name>room_floor/Terrazzo</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

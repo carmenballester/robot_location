@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+<model name="qr40_0">
+  <static>true</static>
+    <link name="link">
+      <visual name="visual">
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <box>
+            <size>0.2 0.2 0.01</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://qr40_0/materials/scripts</uri>
+            <uri>model://qr40_0/materials/textures</uri>
+            <name>qr40_0/Image</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

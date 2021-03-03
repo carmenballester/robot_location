@@ -1,0 +1,8 @@
+prefix=/home/carmenballester/qr_robot_ws/devel
+
+Name: qr_robot_description
+Description: Description of qr_robot_description
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

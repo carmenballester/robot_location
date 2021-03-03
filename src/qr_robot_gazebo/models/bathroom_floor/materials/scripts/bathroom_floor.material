@@ -1,0 +1,14 @@
+material bathroom_floor/Tile
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture tile.jpeg
+        scale 0.1 0.1
+      }
+    }
+  }
+}

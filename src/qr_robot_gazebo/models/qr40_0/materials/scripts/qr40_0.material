@@ -1,0 +1,15 @@
+material qr40_0/Image
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture qr40_0.png
+        filtering trilinear
+      }
+    }
+  }
+}
+

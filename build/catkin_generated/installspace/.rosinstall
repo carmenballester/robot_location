@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/carmenballester/qr_robot_ws/install/setup.sh

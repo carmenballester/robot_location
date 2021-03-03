@@ -1,0 +1,30 @@
+material room_floor/Granite
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture granite.jpeg
+        scale 0.1 0.1
+      }
+    }
+  }
+}
+
+
+material room_floor/Terrazzo
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture terrazzo.jpeg
+        scale 0.1 0.1
+      }
+    }
+  }
+}
