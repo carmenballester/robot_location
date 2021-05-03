@@ -3,6 +3,6 @@ prefix=/home/carmenballester/qr_robot_ws/devel
 Name: qr_robot_localization
 Description: Description of qr_robot_localization
 Version: 0.0.0
-Cflags: 
+Cflags: -I/home/carmenballester/qr_robot_ws/devel/include
 Libs: -L${prefix}/lib 
 Requires: 

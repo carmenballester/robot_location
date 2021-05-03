@@ -80,30 +80,6 @@
       <elevation>0</elevation>
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
-    <model name='qr0_0'>
-      <static>1</static>
-      <link name='link'>
-        <visual name='visual'>
-          <cast_shadows>0</cast_shadows>
-          <geometry>
-            <box>
-              <size>0.2 0.2 0.01</size>
-            </box>
-          </geometry>
-          <material>
-            <script>
-              <uri>model://qr0_0/materials/scripts</uri>
-              <uri>model://qr0_0/materials/textures</uri>
-              <name>qr0_0/Image</name>
-            </script>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
-      <pose frame=''>0 0 0 0 -0 0</pose>
-    </model>
     <state world_name='default'>
       <sim_time>1228 655000000</sim_time>
       <real_time>1002 460550714</real_time>
@@ -265,26 +241,6 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
-      <model name='qr0_0'>
-        <pose frame=''>0 0 0 0 -0 1.5708</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>0 0 0 0 -0 1.5708</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='qr40_0'>
-        <pose frame=''>0.4 0 0 0 -0 1.5708</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>0.4 0 0 0 -0 1.5708</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
       <model name='room_floor'>
         <pose frame=''>2.57641 -1.33129 0 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -346,30 +302,6 @@
         <projection_type>perspective</projection_type>
       </camera>
     </gui>
-    <model name='qr40_0'>
-      <static>1</static>
-      <link name='link'>
-        <visual name='visual'>
-          <cast_shadows>0</cast_shadows>
-          <geometry>
-            <box>
-              <size>0.2 0.2 0.01</size>
-            </box>
-          </geometry>
-          <material>
-            <script>
-              <uri>model://qr40_0/materials/scripts</uri>
-              <uri>model://qr40_0/materials/textures</uri>
-              <name>qr40_0/Image</name>
-            </script>
-          </material>
-        </visual>
-        <self_collide>0</self_collide>
-        <kinematic>0</kinematic>
-        <gravity>1</gravity>
-      </link>
-      <pose frame=''>0.4 0 0 0 -0 0</pose>
-    </model>
     <model name='Room'>
       <pose frame=''>2.49494 -1.375 0 0 -0 0</pose>
       <link name='Wall_10'>

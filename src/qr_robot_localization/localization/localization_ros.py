@@ -17,10 +17,13 @@ import math
 import rospy
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
+from qr_robot_localization.srv import Location, LocationResponse
 
 # Define fx and fy from calibration 
 fx = 1050.00
 fy = 1050.00
+dist = 0.23
+qr_id = "-1"	
 
 
 def mag(x):
@@ -106,6 +109,11 @@ def detectQR(frame):
 		image captured from the camera.
     """
 
+	global fx
+	global fy
+	global dist
+	global qr_id
+
 	# Convert frame to BW and get its size
 	frameGrey = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     # array with height, widht and channels
@@ -138,14 +146,19 @@ def detectQR(frame):
 			displayPoints(frame,Oi,Qi)
 			displayShape(frame,imageCorners)	
 
+
+			#print(tag)
+
 			# REAL VALUES
+			# Id of the QR
+			qr_id = tag[1]
 			# Inicialite values for getting the coordinates from the tag
-			pri = 1
+			pri = 3 #1
 			fin = 0
-			coor = np.zeros(2)
+			coor = np.zeros(4)
 			j = 0
 
-			for i in range(len(tag)):
+			for i in range(3,len(tag)):
 				if tag[i] == "," or tag[i] == ")":
 					fin = i
 					coor[j] = float(tag[pri:fin])
@@ -153,7 +166,7 @@ def detectQR(frame):
 					j = j+1
 
 			# Tag is normalized for getting real coordinates of the points
-			Qr = np.array([coor[0]*0.01, coor[1]*0.01]) # center
+			Qr = np.array([coor[0], coor[1]]) # center
 
 			# LOCATION of the camera
 			# 1. Calculate L
@@ -196,8 +209,8 @@ def detectQR(frame):
 #			thetaRob = thetaCam
 #
 			# 8.Global coordinates - different axis
-			beta_x = 0 #coor[2]
-			beta_y = 0 #coor[3]
+			beta_x = coor[2]
+			beta_y = coor[3]
 			Qr = np.append(Qr, beta_x)
 			Qr = np.append(Qr, beta_y)
 
@@ -214,17 +227,15 @@ def detectQR(frame):
 			alpha4 = math.acos((np.dot(Y_v, x_v))/(mag(Y_v)*mag(x_v)))
 
 			# 2. Calculate robot position using angles between frames and geometry of the robot
-			dist = 0.23			
-
 			xRob = posCamG[0]+math.cos(alpha3)*dist
 			yRob = posCamG[1]+math.cos(alpha4)*dist
 			thetaRob = posCamG[2]
 
 			posRob = np.array([xRob, yRob, thetaRob])
 
-			print("-----Robot position QR {}-----------------------------------------------\n".format(index))
-			print("X: {:.2f}\t\t Y: {:.2f}\t theta: {:.2f}".format(posRob[0], posRob[1], posRob[2]*180/math.pi))
-			print("-----------------------------------------------------------------------\n")
+#			print("-----Robot position QR {}-----------------------------------------------\n".format(index))
+#			print("X: {:.2f}\t\t Y: {:.2f}\t theta: {:.2f}".format(posRob[0], posRob[1], posRob[2]*180/math.pi))
+#			print("-----------------------------------------------------------------------\n")
 
 			index += 1;
 
@@ -261,12 +272,17 @@ def callback(data):
 
 	detectQR(cv_image)	
 	# Display results
-	cv2.imshow("Results_sin_dist",cv_image)
-	cv2.waitKey(5)
+#	cv2.imshow("Results_sin_dist",cv_image)
+#	cv2.waitKey(5)
+
+def handle_location(req):
+	global qr_id
+	return LocationResponse(qr_id)
 
 def listener():
 	rospy.init_node('qr_robot_localization', anonymous=True)
 	rospy.Subscriber("qr_robot/wide_camera/image_raw", Image, callback)
+	rospy.Service('location', Location, handle_location)
 
 	rospy.spin()
 

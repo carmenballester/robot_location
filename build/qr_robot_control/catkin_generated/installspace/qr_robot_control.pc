@@ -1,0 +1,8 @@
+prefix=/home/carmenballester/qr_robot_ws/install
+
+Name: qr_robot_control
+Description: Description of qr_robot_control
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: 

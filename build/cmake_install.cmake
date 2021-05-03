@@ -126,6 +126,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/carmenballester/qr_robot_ws/build/gtest/cmake_install.cmake")
+  include("/home/carmenballester/qr_robot_ws/build/qr_robot_control/cmake_install.cmake")
   include("/home/carmenballester/qr_robot_ws/build/qr_robot_description/cmake_install.cmake")
   include("/home/carmenballester/qr_robot_ws/build/qr_robot_gazebo/cmake_install.cmake")
   include("/home/carmenballester/qr_robot_ws/build/qr_robot_localization/cmake_install.cmake")

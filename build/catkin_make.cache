@@ -1,2 +1,2 @@
-qr_robot_description:qr_robot_gazebo:qr_robot_localization
+qr_robot_control:qr_robot_description:qr_robot_gazebo:qr_robot_localization
 -DCATKIN_DEVEL_PREFIX=/home/carmenballester/qr_robot_ws/devel -DCMAKE_INSTALL_PREFIX=/home/carmenballester/qr_robot_ws/install -G Unix Makefiles
