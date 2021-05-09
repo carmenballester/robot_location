@@ -14,7 +14,9 @@ import zbar
 import yaml
 import math
 
+# Libraries for ROS
 import rospy
+from geometry_msgs.msg import Pose
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 from qr_robot_localization.srv import Location, LocationResponse
@@ -25,14 +27,15 @@ fy = 1050.00
 dist = 0.23
 qr_id = "-1"	
 
+pub = rospy.Publisher('/qr_location', Pose, queue_size=10)
 
 def mag(x):
-	"""Calculate the magnitude of a given vector
+	"""Calculate the magnitude of a given vector.
 	
 	Parameters
 	----------
 	x : 
-	  vector which magnitude is being calculed
+	  vector which magnitude is being calculed.
 	""" 
 
 	return math.sqrt(sum(i**2 for i in x))
@@ -72,7 +75,7 @@ def displayShape(frame, corners):
 		cv2.polylines(frame,[cornersNp],True,(235,0,255),2)
 
 def displayVectors(frame, Oi, Qi, q_v, p_v):
-	"""Displays the Y axis of both QR and image, and the vector between the centers of the coordinate systems
+	"""Displays the Y axis of both QR and image, and the vector between the centers of the coordinate systems.
 	
 	Parameters
 	----------
@@ -108,7 +111,8 @@ def detectQR(frame):
 	frame : numpy.ndarray
 		image captured from the camera.
     """
-
+	
+	# Define global variables that are used
 	global fx
 	global fy
 	global dist
@@ -146,14 +150,11 @@ def detectQR(frame):
 			displayPoints(frame,Oi,Qi)
 			displayShape(frame,imageCorners)	
 
-
-			#print(tag)
-
 			# REAL VALUES
 			# Id of the QR
 			qr_id = tag[1]
 			# Inicialite values for getting the coordinates from the tag
-			pri = 3 #1
+			pri = 3 
 			fin = 0
 			coor = np.zeros(4)
 			j = 0
@@ -166,8 +167,8 @@ def detectQR(frame):
 					j = j+1
 
 			# Tag is normalized for getting real coordinates of the points
-			Qr = np.array([coor[0], coor[1]]) # center
-
+			Qr = np.array([coor[0], coor[1], coor[2], coor[3]]) # center
+		
 			# LOCATION of the camera
 			# 1. Calculate L
 			ax = Oi[0]-Qi[0]
@@ -186,7 +187,9 @@ def detectQR(frame):
 			displayVectors(frame, Oi, Qi, q_v, p_v)
 
 			# 3. Calculate alpha3 - angle between Ycam and Yqr
-			alpha3 = math.acos((np.dot(y_v, Y_v))/(mag(y_v)*mag(Y_v)))
+			dot = y_v[0]*Y_v[0] + y_v[1]*Y_v[1]
+			det = y_v[0]*Y_v[1] - y_v[1]*Y_v[0]
+			alpha3 = math.atan2(det,dot)
 
 			# 4. Calculate alpha1
 			alpha1 = math.acos((np.dot(a_v, Y_v))/(mag(a_v)*mag(Y_v)))
@@ -203,17 +206,7 @@ def detectQR(frame):
 			yCam = L*unity*math.cos(alpha1)
 			thetaCam = alpha3
 
-			# 8. Global coordinates - same axis
-#			xRob = xCam + Qr[0]*0.01 
-#			yRob = yCam + Qr[1]*0.01
-#			thetaRob = thetaCam
-#
 			# 8.Global coordinates - different axis
-			beta_x = coor[2]
-			beta_y = coor[3]
-			Qr = np.append(Qr, beta_x)
-			Qr = np.append(Qr, beta_y)
-
 			rot = np.array([[math.cos(Qr[2]), math.sin(Qr[2]), 0],
 				   [-math.sin(Qr[3]), math.cos(Qr[3]), 0],
 				   [0, 0, 1]])
@@ -231,11 +224,22 @@ def detectQR(frame):
 			yRob = posCamG[1]+math.cos(alpha4)*dist
 			thetaRob = posCamG[2]
 
-			posRob = np.array([xRob, yRob, thetaRob])
+			posRob = np.array([xRob, yRob, thetaRob+math.pi])
 
-#			print("-----Robot position QR {}-----------------------------------------------\n".format(index))
-#			print("X: {:.2f}\t\t Y: {:.2f}\t theta: {:.2f}".format(posRob[0], posRob[1], posRob[2]*180/math.pi))
-#			print("-----------------------------------------------------------------------\n")
+			print("-----Robot position QR {}-----------------------------------------------\n".format(index))
+			print("X: {:.2f}\t\t Y: {:.2f}\t theta: {:.2f}".format(posRob[0], posRob[1], posRob[2]))
+			print("-----------------------------------------------------------------------\n")
+			
+			# INTEGRATION in ros
+			# 1. Define the message variable
+			pos_msg = Pose()
+
+			# 2. Complete the message with the robot position and publish it
+			pos_msg.position.x = xRob
+			pos_msg.position.y = yRob
+			pos_msg.orientation.z = thetaRob
+
+			pub.publish(pos_msg)
 
 			index += 1;
 
@@ -265,26 +269,49 @@ def undist(frame):
 
 	return image
 
-def callback(data): 
-	# Get one frame
+def callback_image(data): 
+	""" Callback executed everytime an image is published in the topic /qr_robot/wide_camera/image_raw. 
+
+	Parameters
+	----------
+	data : Image
+		image captured from the camera.
+	"""
+
+	# Convert the image received in CV format
 	bridge = CvBridge()
 	cv_image = bridge.imgmsg_to_cv2(data, desired_encoding='passthrough')
 
+	# Detect QR and display results
 	detectQR(cv_image)	
-	# Display results
-#	cv2.imshow("Results_sin_dist",cv_image)
-#	cv2.waitKey(5)
+	cv2.imshow("Results_sin_dist",cv_image)
+	cv2.waitKey(5)
 
 def handle_location(req):
+	""" Callback executed everytime the location service is called. 
+
+	Parameters
+	----------
+	req : none
+
+	"""
+
+	# Get the id of the last QR seen and send it
 	global qr_id
 	return LocationResponse(qr_id)
 
-def listener():
+def main():
+	""" Main function where ROS parameters are initialized. 
+
+	"""
+
 	rospy.init_node('qr_robot_localization', anonymous=True)
-	rospy.Subscriber("qr_robot/wide_camera/image_raw", Image, callback)
+	rospy.Subscriber("qr_robot/wide_camera/image_raw", Image, callback_image)
 	rospy.Service('location', Location, handle_location)
 
 	rospy.spin()
 
 if __name__ == "__main__":
-	listener()
+	try:
+		main()
+	except rospy.ROSInterruptException: pass
