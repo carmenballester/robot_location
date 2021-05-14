@@ -22,9 +22,10 @@ from cv_bridge import CvBridge
 from qr_robot_localization.srv import Location, LocationResponse
 
 # Define fx and fy from calibration 
-fx = 1050.00
-fy = 1050.00
-dist = 0.23
+fx = 670.00
+fy = 1000.00
+dist_x = 0.46
+dist_y = 0.13
 qr_id = "-1"	
 
 pub = rospy.Publisher('/qr_location', Pose, queue_size=10)
@@ -90,12 +91,12 @@ def displayVectors(frame, Oi, Qi, q_v, p_v):
 	"""
 
 	# Display axis
-	cv2.arrowedLine(frame, (int(Oi[0]), int(Oi[1])), (int(Oi[0]), int(Oi[1])-100), (0,0,255), 2) # Y Image 
-	cv2.arrowedLine(frame, (int(Oi[0]), int(Oi[1])), (int(Oi[0]+100), int(Oi[1])), (0,0,255), 2) # X Image 
+	cv2.arrowedLine(frame, (int(Oi[0]), int(Oi[1])), (int(Oi[0]-100), int(Oi[1])), (0,0,255), 2) # Y Image 
+	cv2.arrowedLine(frame, (int(Oi[0]), int(Oi[1])), (int(Oi[0]), int(Oi[1])-100), (0,0,255), 2) # X Image 
 	cv2.arrowedLine(frame, (int(Qi[0]), int(Qi[1])), (int(Qi[0]+q_v[0]), int(Qi[1])+q_v[1]), (235,0,255), 2) # Y QR 
 	cv2.arrowedLine(frame, (int(Qi[0]), int(Qi[1])), (int(Qi[0]+p_v[0]), int(Qi[1])+p_v[1]), (235,0,255), 2) # X QR 
-	cv2.putText(frame, "y", (int(Oi[0]+10), int(Oi[1])-100+10),cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0,0,255), 2) # Y Label Image
-	cv2.putText(frame, "x", (int(Oi[0]+100+10), int(Oi[1])+10),cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0,0,255), 2) #X Label Image
+	cv2.putText(frame, "y", (int(Oi[0]-100+10), int(Oi[1])-10),cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0,0,255), 2) # Y Label Image
+	cv2.putText(frame, "x", (int(Oi[0]+10), int(Oi[1])-100+10),cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0,0,255), 2) #X Label Image
 	cv2.putText(frame, "Y", (int(Qi[0]+q_v[0]), int(Qi[1])+q_v[1]-10),cv2.FONT_HERSHEY_SIMPLEX, 0.75, (235,0,255), 2) # Y Label QR
 	cv2.putText(frame, "X", (int(Qi[0]+p_v[0]), int(Qi[1])+p_v[1]-10),cv2.FONT_HERSHEY_SIMPLEX, 0.75, (235,0,255), 2) # X Label QR
 
@@ -179,8 +180,8 @@ def detectQR(frame):
 			q_v = np.array([(Ai[0]-Bi[0]),(Ai[1]-Bi[1])])
 			p_v = np.array([(Di[0]-Ai[0]),(Di[1]-Ai[1])])
 			a_v = np.array([ax,ay])
-			y_v = np.array([(Oi[0]-Oi[0]),(100-Oi[1])])
-			x_v = np.array([(Oi[0]-100),(Oi[1]-Oi[1])])
+			y_v = np.array([(100-Oi[0]),(Oi[1]-Oi[1])])
+			x_v = np.array([(Oi[0]-Oi[0]),(100-Oi[1])])
 			Y_v = np.array([((Qi[0]+q_v[0])-Qi[0]),((Qi[1]+q_v[1])-Qi[1])])
 			X_v = np.array([((Qi[0]+p_v[0])-Qi[0]),((Qi[1]+p_v[1])-Qi[1])])
 
@@ -216,15 +217,12 @@ def detectQR(frame):
 			posCamG = np.transpose(np.dot(rot,posCam))[0] + posQr
 			
 			# LOCATION of the robot
-			# 1. Calculate alpha4 - angle between Ycam and Xqr
-			alpha4 = math.acos((np.dot(Y_v, x_v))/(mag(Y_v)*mag(x_v)))
-
-			# 2. Calculate robot position using angles between frames and geometry of the robot
-			xRob = posCamG[0]+math.cos(alpha3)*dist
-			yRob = posCamG[1]+math.cos(alpha4)*dist
+			# Calculate robot position using angles between frames and geometry of the robot
+			xRob = posCamG[0]-math.cos(alpha3)*dist_x
+			yRob = posCamG[1]-math.cos(alpha3)*dist_y
 			thetaRob = posCamG[2]
 
-			posRob = np.array([xRob, yRob, thetaRob+math.pi])
+			posRob = np.array([xRob, yRob, thetaRob])
 
 			print("-----Robot position QR {}-----------------------------------------------\n".format(index))
 			print("X: {:.2f}\t\t Y: {:.2f}\t theta: {:.2f}".format(posRob[0], posRob[1], posRob[2]))
@@ -269,24 +267,6 @@ def undist(frame):
 
 	return image
 
-def callback_image(data): 
-	""" Callback executed everytime an image is published in the topic /qr_robot/wide_camera/image_raw. 
-
-	Parameters
-	----------
-	data : Image
-		image captured from the camera.
-	"""
-
-	# Convert the image received in CV format
-	bridge = CvBridge()
-	cv_image = bridge.imgmsg_to_cv2(data, desired_encoding='passthrough')
-
-	# Detect QR and display results
-	detectQR(cv_image)	
-	cv2.imshow("Results_sin_dist",cv_image)
-	cv2.waitKey(5)
-
 def handle_location(req):
 	""" Callback executed everytime the location service is called. 
 
@@ -301,15 +281,38 @@ def handle_location(req):
 	return LocationResponse(qr_id)
 
 def main():
-	""" Main function where ROS parameters are initialized. 
+	""" Main function where ROS parameters and camera are initialized. 
 
 	"""
 
+	# Initialize ROS
 	rospy.init_node('qr_robot_localization', anonymous=True)
-	rospy.Subscriber("qr_robot/wide_camera/image_raw", Image, callback_image)
 	rospy.Service('location', Location, handle_location)
+	
+	# Initialize camera
+	capture = cv2.VideoCapture(1)
+  	capture.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'))
+  	width = 1080
+  	height = 720
+  	capture.set(cv2.CAP_PROP_FRAME_WIDTH, width)
+  	capture.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 
-	rospy.spin()
+	while not rospy.is_shutdown():
+		# Get one frame
+		ok, frame = capture.read()
+		c_frame = undist(frame)
+    	# Check if the frame has been successfully read
+		if ok:
+			detectQR(c_frame)	
+
+			# Display results
+			cv2.imshow("Results_no_dist",c_frame)
+			cv2.waitKey(5)
+
+	# When a key is presed, release the capture, close the window and finish the program
+	capture.release()
+	cv2.destroyAllWindows()
+	exit()
 
 if __name__ == "__main__":
 	try:

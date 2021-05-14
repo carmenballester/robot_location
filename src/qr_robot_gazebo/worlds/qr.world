@@ -81,10 +81,10 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <state world_name='default'>
-      <sim_time>4863 253000000</sim_time>
-      <real_time>153 282207308</real_time>
-      <wall_time>1620122466 356281877</wall_time>
-      <iterations>152159</iterations>
+      <sim_time>7430 762000000</sim_time>
+      <real_time>2334 753347565</real_time>
+      <wall_time>1620663801 137054737</wall_time>
+      <iterations>2288702</iterations>
       <model name='Room'>
         <pose frame=''>2.49494 -1.375 0 0 -0 0</pose>
         <scale>1 1 1</scale>
@@ -152,13 +152,13 @@
         </link>
       </model>
       <model name='beer'>
-        <pose frame=''>0.7594 -1.93372 0.660001 -7e-06 8e-06 0.000274</pose>
+        <pose frame=''>0.759398 -1.93374 0.659991 1.1e-05 -2e-06 0.000655</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>0.759401 -1.93372 0.775001 -7e-06 8e-06 0.000274</pose>
+          <pose frame=''>0.759397 -1.93374 0.774991 1.1e-05 -2e-06 0.000655</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0.014938 0.013716 19.5988 -0.116332 0.132766 -0.008594</acceleration>
-          <wrench>0.005826 0.005349 7.64351 0 -0 0</wrench>
+          <acceleration>0 0 -9.8 0 -0 0</acceleration>
+          <wrench>0 0 -3.822 0 -0 0</wrench>
         </link>
       </model>
       <model name='closet'>
@@ -281,6 +281,66 @@
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
+      <model name='qr-E'>
+        <pose frame=''>4 1 0 0 -0 1.5708</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>4 1 0 0 -0 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='qr-F'>
+        <pose frame=''>3.5 -1.5 0 0 -0 1.5708</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>3.5 -1.5 0 0 -0 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='qr-G'>
+        <pose frame=''>1.5 -2.5 0 0 -0 1.5708</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>1.5 -2.5 0 0 -0 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='qr-H'>
+        <pose frame=''>6.5 0 0 0 -0 1.5708</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>6.5 0 0 0 -0 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='qr-I'>
+        <pose frame=''>6.5 -3.5 0 0 -0 1.5708</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>6.5 -3.5 0 0 -0 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='qr-J'>
+        <pose frame=''>5 -3 0 0 -0 1.5708</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>5 -3 0 0 -0 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
       <model name='qr-O'>
         <pose frame=''>0.5 0 0 0 -0 1.5708</pose>
         <scale>1 1 1</scale>
@@ -322,13 +382,13 @@
         </link>
       </model>
       <model name='table_1'>
-        <pose frame=''>-1.19044 1.775 0.0109 0 0.015574 2e-06</pose>
+        <pose frame=''>-1.19044 1.775 0.010901 -0 0.015575 2e-06</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>-1.19044 1.775 0.0109 0 0.015574 2e-06</pose>
+          <pose frame=''>-1.19044 1.775 0.010901 -0 0.015575 2e-06</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-4e-06 1.8e-05 -7e-06 -3e-06 -1.9e-05 -3.2e-05</acceleration>
-          <wrench>-4e-06 1.8e-05 -7e-06 0 -0 0</wrench>
+          <acceleration>-5e-06 1.9e-05 -7e-06 -3e-06 -1.9e-05 -3.2e-05</acceleration>
+          <wrench>-5e-06 1.9e-05 -7e-06 0 -0 0</wrench>
         </link>
       </model>
       <model name='wardrobe'>
@@ -347,7 +407,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>1.47229 -0.105776 3.18902 3.1e-05 1.51887 1.23877</pose>
+        <pose frame=''>6.76854 -6.21687 8.51179 -0 1.07087 1.30677</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -2129,6 +2189,150 @@
         <gravity>1</gravity>
       </link>
       <pose frame=''>1.62132 0.010291 0 0 -0 0</pose>
+    </model>
+    <model name='qr-E'>
+      <static>1</static>
+      <link name='link'>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://qr-E/materials/scripts</uri>
+              <uri>model://qr-E/materials/textures</uri>
+              <name>qr-E/Image</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>1.32765 0.490094 0 0 -0 0</pose>
+    </model>
+    <model name='qr-F'>
+      <static>1</static>
+      <link name='link'>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://qr-F/materials/scripts</uri>
+              <uri>model://qr-F/materials/textures</uri>
+              <name>qr-F/Image</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>1.33929 0.061723 0 0 -0 0</pose>
+    </model>
+    <model name='qr-G'>
+      <static>1</static>
+      <link name='link'>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://qr-G/materials/scripts</uri>
+              <uri>model://qr-G/materials/textures</uri>
+              <name>qr-G/Image</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>1.33931 -0.408848 0 0 -0 0</pose>
+    </model>
+    <model name='qr-I'>
+      <static>1</static>
+      <link name='link'>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://qr-I/materials/scripts</uri>
+              <uri>model://qr-I/materials/textures</uri>
+              <name>qr-I/Image</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>1.35049 -0.7624 0 0 -0 0</pose>
+    </model>
+    <model name='qr-J'>
+      <static>1</static>
+      <link name='link'>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://qr-J/materials/scripts</uri>
+              <uri>model://qr-J/materials/textures</uri>
+              <name>qr-J/Image</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>1.96319 -0.749131 0 0 -0 0</pose>
+    </model>
+    <model name='qr-H'>
+      <static>1</static>
+      <link name='link'>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://qr-H/materials/scripts</uri>
+              <uri>model://qr-H/materials/textures</uri>
+              <name>qr-H/Image</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>5.97118 0.00321 0 0 -0 0</pose>
     </model>
   </world>
 </sdf>

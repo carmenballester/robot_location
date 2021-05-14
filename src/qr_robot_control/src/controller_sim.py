@@ -75,7 +75,13 @@ graph = {'O':[0.5,0.0],
 		 'A':[0.5, 2.0],
 		 'B':[-0.5, 3.5],
 		 'C':[-1.0, -3.0],
-		 'D':[2.0, 0.0]} 
+		 'D':[2.0, 0.0],
+		 'E':[4.0, 1.0],
+		 'F':[3.5, -1.5],
+		 'G':[1.5, -2.5],
+		 'H':[6.5, 0.0],
+		 'I':[6.5, -3.5],
+		 'J':[5.0, -3.0]} 
 
 # Define program variables
 goal_reached = False
@@ -212,7 +218,7 @@ def callback_location(msg):
 		vel_pub.publish(vel_msg)
 
 		# Check if the goal has been reached
-		goal_reached = True if em<0.1 else False
+		goal_reached = True if em<0.3 else False
 
 def callback_odom(msg):
 	""" Callback executed everytime a pose is published in the topic /odom
@@ -282,7 +288,7 @@ def callback_odom(msg):
 		vel_pub.publish(vel_msg)
 		
 		# Check if the goal has been reached
-		goal_reached = True if em<0.1 else False
+		goal_reached = True if em<0.3 else False
 
 def callback_gazebo(msg):
 	""" Callback executed everytime a pose is published in the topic /gazebo/model_states. It is used to know the real path followed by the robot.
@@ -340,7 +346,7 @@ def location_client():
 	except rospy.ServiceException as e:
 		print("Service call failed: %s"%e)
 
-def trajectory_plot(qr_data, odom_data, trajectory_data):
+def trajectory_plot(qr_data, odom_data, trajectory_data, gazebo_data):
 	""" Function representing the calculated trajectory and the diferent received positions.
 
 	Parameters
@@ -350,6 +356,8 @@ def trajectory_plot(qr_data, odom_data, trajectory_data):
 	odom_data:
 	  positions of the robot from odometry.
 	trajectory_data:
+	  calculated trajectory.
+	gazebo_data:
 	  positions of the robot from Gazebo (the real positions).
 	"""
 
@@ -363,7 +371,7 @@ def trajectory_plot(qr_data, odom_data, trajectory_data):
 	with plt.style.context('seaborn-pastel'):
 		fig, ax = plt.subplots()
 		# Set the axis
-		ax.set_xlim([-2, 3])	
+		ax.set_xlim([-2, 7])	
 		ax.set_ylim([-4, 3])
 		
 		# Plot the calculated trajectory and the QR localizations	
@@ -399,6 +407,7 @@ def main():
 	global qr_data
 	global odom_data
 	global trajectory_data
+	global gazebo_data
 
 	# Define auxiliar variables
 	node_goal = ""
@@ -415,12 +424,13 @@ def main():
 		if goal_reached or node_goal==node_act:
 			# SERVICES 
 			# Trajectory service call for new goal
+			print("node goal={}		node act={}".format(node_goal, node_act))
 			print("Requesting new goal...")
 			node_goal = dijkstra_client()
 			# Check if there is another local goal
 			if node_goal == "-1":
 				print("Global goal reached. End of the process.")
-				trajectory_plot(qr_data, odom_data, trajectory_data)
+				trajectory_plot(qr_data, odom_data, trajectory_data, gazebo_data)
 				sys.exit()
 
 			else:
@@ -461,6 +471,8 @@ def main():
 			dot = axis.x*traj.x + axis.y*traj.y
 			det = axis.x*traj.y - axis.y*traj.x
 			theta_traj = math.atan2(det,dot)
+
+			print("")
 			
 			goal_reached = False
 

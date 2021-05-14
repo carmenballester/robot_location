@@ -109,6 +109,13 @@ def main():
 			("O", "D", 1.5),
 			("A", "B", 1.80),
 			("A", "D", 2.5),
+			("D", "E", 2.24),
+			("D", "F", 2.12),
+			("D", "G", 2.55),
+			("D", "H", 4.5),
+			("F", "G", 2.24),
+			("H", "I", 3.5),
+			("I", "J", 1.58),
 		]
 		
 		# Define global variables
@@ -125,7 +132,7 @@ def main():
 		# Get the path 
 		cost = dijkstra[0]
 		path = dijkstra[1]
-	#	path = ['O', 'C', 'O', 'D']
+#		path = ['O', 'C', 'O', 'D']
 		print("The cost is: {} and the path is: {}".format(cost, path))
 	
 		# Init ROS params
