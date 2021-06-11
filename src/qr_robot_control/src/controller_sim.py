@@ -96,7 +96,7 @@ traj = vector(init, goal)
 
 # Define controller coefficients and parameters
 kd = 1
-kalp = 1
+kalp = 0.5
 kv = 1
 v_max = 0.25
 
@@ -389,7 +389,7 @@ def trajectory_plot(qr_data, odom_data, trajectory_data, gazebo_data):
 		ax.set_title('Robot position')
 		ax.legend()
 
-	plt.show()
+#	plt.show()
 
 def main():
 	""" Main function that coordinates the control and the localization.
@@ -431,7 +431,8 @@ def main():
 			if node_goal == "-1":
 				print("Global goal reached. End of the process.")
 				trajectory_plot(qr_data, odom_data, trajectory_data, gazebo_data)
-				sys.exit()
+				rospy.spin()
+#				sys.exit()
 
 			else:
 				print("New goal received: {}".format(node_goal))
