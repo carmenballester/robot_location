@@ -12,11 +12,13 @@ Universidad de Alicante
 from sys import exit
 import numpy as np
 import math
+import time
 import matplotlib.pyplot as plt
 
 # Libraries for ROS
 import rospy
 from std_msgs.msg import String
+from std_msgs.msg import Empty
 from geometry_msgs.msg import Twist
 from geometry_msgs.msg import Pose
 from nav_msgs.msg import Odometry
@@ -66,9 +68,9 @@ class pose:
 		self.theta = theta
 
 
-# Create the publisher for the velocity
+# Create the publisher for the velocity and for the odom
 vel_pub = rospy.Publisher('/mobile_base/commands/velocity', Twist, queue_size=10) #gazebo
-# vel_pub = rospy.Publisher('/cmd_vel_mux/input/navi', Twist, queue_size=10) #real
+reset_odom = rospy.Publisher('/mobile_base/commands/reset_odometry', Empty, queue_size=10)
 
 # Define the dictionary wich contains the equivalence between a qr id and its coordinates in 3D
 graph = {'O':[0.5,0.0],
@@ -93,6 +95,7 @@ theta_traj = 0.0
 init = point(0.0, 0.0)
 goal = point(0.0, 0.0)
 traj = vector(init, goal)
+offset = [0.0, 0.0]
 
 # Define controller coefficients and parameters
 kd = 1
@@ -290,6 +293,38 @@ def callback_odom(msg):
 		# Check if the goal has been reached
 		goal_reached = True if em<0.3 else False
 
+
+def mod_odom():
+
+	global offset
+	global qr_data
+
+	if len(qr_data[0]) > 0:
+		print(len(qr_data))	
+		# INTEGRATION in ros
+		# 1. Define the message variable
+		vel_msg = Twist()
+		
+		# 2. Complete the message with the control values and publish it
+		vel_msg.linear.x = 0.0
+		vel_msg.angular.z = 0.0
+		
+		vel_pub.publish(vel_msg)
+	
+#		timer = time.time()
+#		print("Reseting odometry...")
+#		while time.time() - timer < 0.30:
+#			reset_odom.publish(Empty())
+	
+		offset[0] = qr_data[0][len(qr_data)]
+		offset[1] = qr_data[1][len(qr_data)]
+		
+		print(offset)
+	
+
+		
+
+
 def callback_gazebo(msg):
 	""" Callback executed everytime a pose is published in the topic /gazebo/model_states. It is used to know the real path followed by the robot.
 	
@@ -380,6 +415,7 @@ def trajectory_plot(qr_data, odom_data, trajectory_data, gazebo_data):
 
 		# Plot the positions data
 		ax.plot(gazebo_data[0], gazebo_data[1], linewidth=2, label='Position-Gazebo')
+#		ax.plot(odom_data[0], odom_data[1], '.', markersize=7, label='Position-odom')
 		ax.plot(odom_data[0], odom_data[1], linewidth=2, label='Position-odom')
 		ax.plot(qr_data[0], qr_data[1], '.', markersize=7, label='Position-QR')
 
@@ -389,7 +425,9 @@ def trajectory_plot(qr_data, odom_data, trajectory_data, gazebo_data):
 		ax.set_title('Robot position')
 		ax.legend()
 
-#	plt.show()
+#	for i in range(len(odom_data[0])):
+#		print("[{}, {}]".format(odom_data[0][i], odom_data[1][i]))
+	plt.show()
 
 def main():
 	""" Main function that coordinates the control and the localization.
@@ -422,17 +460,17 @@ def main():
 	while(not rospy.is_shutdown()):
 		# Check if the goal has been reached
 		if goal_reached or node_goal==node_act:
+			mod_odom()
 			# SERVICES 
 			# Trajectory service call for new goal
-			print("node goal={}		node act={}".format(node_goal, node_act))
 			print("Requesting new goal...")
 			node_goal = dijkstra_client()
 			# Check if there is another local goal
 			if node_goal == "-1":
 				print("Global goal reached. End of the process.")
 				trajectory_plot(qr_data, odom_data, trajectory_data, gazebo_data)
-				rospy.spin()
-#				sys.exit()
+#				rospy.spin()
+				sys.exit()
 
 			else:
 				print("New goal received: {}".format(node_goal))

@@ -25,7 +25,7 @@ from qr_robot_localization.srv import Location, LocationResponse
 fx = 1050.00
 fy = 1050.00
 dist_x = 0.23
-dist_y = 0.0
+dist_y = 0.00
 qr_id = "-1"	
 
 pub = rospy.Publisher('/qr_location', Pose, queue_size=10)
@@ -218,8 +218,8 @@ def detectQR(frame):
 			
 			# LOCATION of the robot
 			# Calculate robot position using angles between frames and geometry of the robot
-			xRob = posCamG[0]+math.cos(alpha3)*dist_x
-			yRob = posCamG[1]+math.cos(alpha3)*dist_y
+			xRob = posCamG[0]+math.cos(alpha3)*mag([dist_x,dist_y])
+			yRob = posCamG[1]+math.sin(alpha3)*mag([dist_x,dist_y])
 			thetaRob = posCamG[2]
 
 			posRob = np.array([xRob, yRob, thetaRob+math.pi])
@@ -233,9 +233,9 @@ def detectQR(frame):
 			pos_msg = Pose()
 
 			# 2. Complete the message with the robot position and publish it
-			pos_msg.position.x = xRob
-			pos_msg.position.y = yRob
-			pos_msg.orientation.z = thetaRob
+			pos_msg.position.x = posRob[0]
+			pos_msg.position.y = posRob[1]
+			pos_msg.orientation.z = posRob[2]
 
 			pub.publish(pos_msg)
 

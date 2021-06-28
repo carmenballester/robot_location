@@ -218,8 +218,8 @@ def detectQR(frame):
 			
 			# LOCATION of the robot
 			# Calculate robot position using angles between frames and geometry of the robot
-			xRob = posCamG[0]-math.cos(alpha3)*dist_x
-			yRob = posCamG[1]-math.cos(alpha3)*dist_y
+			xRob = posCamG[0]+math.cos(alpha3)*mag([dist_x,dist_y])
+			yRob = posCamG[1]+math.sin(alpha3)*mag([dist_x,dist_y])
 			thetaRob = posCamG[2]
 
 			posRob = np.array([xRob, yRob, thetaRob])

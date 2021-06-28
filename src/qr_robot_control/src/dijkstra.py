@@ -132,7 +132,7 @@ def main():
 		# Get the path 
 		cost = dijkstra[0]
 		path = dijkstra[1]
-		path = ['O', 'D', 'F', 'G']
+#		path = ['O', 'D', 'F', 'G']
 		print("The cost is: {} and the path is: {}".format(cost, path))
 	
 		# Init ROS params
