@@ -119,9 +119,9 @@ def callback_location(msg):
 	"""
 
 	# Define global variables that are used
-#	global theta_traj
-#	global coefs_traj
-#	global goal
+	global theta_traj
+	global coefs_traj
+	global goal
 	global goal_reached
 
 	# Check if there is some trajectory calculated and the goal is not reached
@@ -215,8 +215,8 @@ def main():
 	"""
 
 	# Define global variables that are used
-#	global graph
-#	global goal_reached
+	global graph
+	global goal_reached
 	global traj
 	global theta_traj
 	global coefs_traj
@@ -290,4 +290,4 @@ def main():
 if __name__ == '__main__':
 	try:
 		main()
-	except rospy.ROSInterruptExcyyeption: pass
+	except rospy.ROSInterruptException: pass

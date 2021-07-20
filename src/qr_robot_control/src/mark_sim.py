@@ -26,13 +26,13 @@ class pose:
 	Representation of the pose of the robot
 	"""
 
-	def __init__(self, x, y, theta):
+	def __init__(self, x=0.0, y=0.0, theta=0.0):
 		self.x = x
 		self.y = y
 		self.theta = theta
 
 # Create the publisher for the odometry
-reset_odom = rospy.Publisher('/mobile_base/commands/reset_odometry', Empty, queue_size=10)
+#reset_odom = rospy.Publisher('/mobile_base/commands/reset_odometry', Empty, queue_size=10)
 
 # Define the dictionary wich contains the equivalence between a qr id and its coordinates in 3D
 graph = {'O':[0.5,0.0],
@@ -46,6 +46,9 @@ graph = {'O':[0.5,0.0],
 		 'H':[6.5, 0.0],
 		 'I':[6.5, -3.5],
 		 'J':[5.0, -3.0]} 
+
+# Define program variables
+qr_received = False
 
 # Define representation variables
 odom_data = [[],[],[]]
@@ -97,6 +100,10 @@ def callback_qr(msg):
 	"""
 
 	global qr_data
+	global qr_received
+
+	qr_received = True
+	print(qr_received)
 
 	# Define the pose of the robot from the message received
 	pos_rob = pose(msg.position.x, msg.position.y, msg.orientation.z)
@@ -203,12 +210,48 @@ def main():
 	rospy.Subscriber("/qr_location", Pose, callback_qr)
 	rospy.Subscriber("/gazebo/model_states", ModelStates, callback_gazebo)
 
+	loc_pub = rospy.Publisher("/robot_location", Pose, queue_size=10)
+	loc_msg = Pose()
+
+	pos_rob = pose()
+	global qr_received
 
 	# TODO: add the main funcionality 
 	
+	while(not rospy.is_shutdown()):
+#		print(qr_received)
+		if qr_received:
+			
+			# 1.1. Corregir el error de la odometria actualizando el vector de error
+			if len(qr_data[0]) > 0:
+#				print("qr")
+				pos_rob.x = qr_data[0][len(qr_data[0])-1]
+				pos_rob.y = qr_data[1][len(qr_data[1])-1]
+				pos_rob.theta = qr_data[2][len(qr_data[2])-1]
 
 
-if __name__ == '__main__'
+		else: 
+		
+			# 2.1. Actualizar el valor de la odometria con el vector de error
+
+			if len(odom_data[0]) > 0:
+#				print("odom")
+				pos_rob.x = odom_data[0][len(odom_data[0])-1]
+				pos_rob.y = odom_data[1][len(odom_data[1])-1]
+				pos_rob.theta = odom_data[2][len(odom_data[2])-1]
+	
+		# 3. Publicar el valor de la posicion
+#		print("{:6f},{:6f},{:6f}".format(pos_rob.x, pos_rob.y, pos_rob.theta))
+		loc_msg.position.x = pos_rob.x
+		loc_msg.position.y = pos_rob.y
+		loc_msg.orientation.z = pos_rob.theta
+
+		loc_pub.publish(loc_msg)
+
+		qr_received = False
+
+
+if __name__ == '__main__':
 	try:
 		main()
-	except rospy.ROSInterruptExcyyeption: pass
+	except rospy.ROSInterruptException: pass
