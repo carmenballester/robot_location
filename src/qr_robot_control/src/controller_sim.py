@@ -192,7 +192,7 @@ def dijkstra_client():
 
 
 def location_client():
-	""" Client that request the id of the last qr seen the to the service location.
+	""" Client that request the id of the qr which is being seen the to the service location.
 
 	"""
 

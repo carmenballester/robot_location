@@ -132,6 +132,7 @@ def detectQR(frame):
 	scan.scan(imageZBar)
 	
 	index = 1
+	qr_id = "-1"	
 
 	for QRCode in imageZBar:
 		# Save corners and label attached to every QR Code
@@ -223,6 +224,8 @@ def detectQR(frame):
 			thetaRob = posCamG[2]
 
 			posRob = np.array([xRob, yRob, thetaRob+math.pi])
+
+			posRob[2] = posRob[2] if posRob[2]<math.pi else posRob[2]-2*math.pi
 
 			print("-----Robot position QR {}-----------------------------------------------\n".format(index))
 			print("X: {:.2f}\t\t Y: {:.2f}\t theta: {:.2f}".format(posRob[0], posRob[1], posRob[2]))

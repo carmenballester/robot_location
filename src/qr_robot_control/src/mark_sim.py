@@ -19,6 +19,8 @@ import rospy
 from geometry_msgs.msg import Pose
 from nav_msgs.msg import Odometry
 from gazebo_msgs.msg import ModelStates
+# Personalized services
+from qr_robot_localization.srv import *
 
 # Define classes
 class pose: 
@@ -100,10 +102,6 @@ def callback_qr(msg):
 	"""
 
 	global qr_data
-	global qr_received
-
-	qr_received = True
-	print(qr_received)
 
 	# Define the pose of the robot from the message received
 	pos_rob = pose(msg.position.x, msg.position.y, msg.orientation.z)
@@ -203,6 +201,24 @@ def trajectory_plot(qr_data, odom_data, gazebo_data):
 	plt.show()
 
 
+def location_client():
+	""" Client that request the id of the qr which is being seen the to the service location.
+
+	"""
+
+	# Wait until the service is operative
+	rospy.wait_for_service('location')
+	try: 
+		# Define the service proxy for using it
+		location = rospy.ServiceProxy('location', Location)
+		# Get the value of the last qr and return it to the main function
+		resp = location()
+		return resp.node
+
+	except rospy.ServiceException as e:
+		print("Service call failed: %s"%e)
+
+
 def main():
 	# Initialize ROS params
 	rospy.init_node('loc_controller', anonymous=True)
@@ -214,31 +230,26 @@ def main():
 	loc_msg = Pose()
 
 	pos_rob = pose()
-	global qr_received
 
 	# TODO: add the main funcionality 
 	
 	while(not rospy.is_shutdown()):
-#		print(qr_received)
-		if qr_received:
-			
+		# Location service call for actual localization
+		qr_received = location_client()
+		# Check if there is position information
+		if qr_received == "-1":
 			# 1.1. Corregir el error de la odometria actualizando el vector de error
-			if len(qr_data[0]) > 0:
-#				print("qr")
-				pos_rob.x = qr_data[0][len(qr_data[0])-1]
-				pos_rob.y = qr_data[1][len(qr_data[1])-1]
-				pos_rob.theta = qr_data[2][len(qr_data[2])-1]
-
-
-		else: 
-		
-			# 2.1. Actualizar el valor de la odometria con el vector de error
-
 			if len(odom_data[0]) > 0:
-#				print("odom")
 				pos_rob.x = odom_data[0][len(odom_data[0])-1]
 				pos_rob.y = odom_data[1][len(odom_data[1])-1]
 				pos_rob.theta = odom_data[2][len(odom_data[2])-1]
+
+		else:
+			# 2.1. Actualizar el valor de la odometria con el vector de error
+			if len(qr_data[0]) > 0:
+				pos_rob.x = qr_data[0][len(qr_data[0])-1]
+				pos_rob.y = qr_data[1][len(qr_data[1])-1]
+				pos_rob.theta = qr_data[2][len(qr_data[2])-1]
 	
 		# 3. Publicar el valor de la posicion
 #		print("{:6f},{:6f},{:6f}".format(pos_rob.x, pos_rob.y, pos_rob.theta))
@@ -246,9 +257,9 @@ def main():
 		loc_msg.position.y = pos_rob.y
 		loc_msg.orientation.z = pos_rob.theta
 
-		loc_pub.publish(loc_msg)
+		print(loc_msg)
 
-		qr_received = False
+		loc_pub.publish(loc_msg)
 
 
 if __name__ == '__main__':
