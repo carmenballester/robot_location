@@ -13,6 +13,7 @@ from sys import exit
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+import cv2
 
 # Libraries for ROS
 import rospy
@@ -54,6 +55,7 @@ qr_received = False
 
 # Define representation variables
 odom_data = [[],[],[]]
+corrected_odom_data = [[],[],[]]
 qr_data = [[],[],[]]
 gazebo_data = [[],[],[]]
 #trajectory_data = [[],[],[]]
@@ -102,6 +104,8 @@ def callback_qr(msg):
 	"""
 
 	global qr_data
+	global aux_odom_data
+	global odom_data
 
 	# Define the pose of the robot from the message received
 	pos_rob = pose(msg.position.x, msg.position.y, msg.orientation.z)
@@ -157,7 +161,7 @@ def callback_gazebo(msg):
 		gazebo_data[2].append(msg.pose[i].orientation.z)	
 
 
-def trajectory_plot(qr_data, odom_data, gazebo_data):
+def trajectory_plot():
 	""" Function representing the calculated trajectory and the diferent received positions.
 
 	Parameters
@@ -169,6 +173,11 @@ def trajectory_plot(qr_data, odom_data, gazebo_data):
 	gazebo_data:
 	  positions of the robot from Gazebo (the real positions).
 	"""
+
+	global corrected_odom_data
+	global gazebo_data
+	global odom_data
+	global qr_data
 
 	# Get the QR coordinates
 	qr_mark = [[],[]]
@@ -188,8 +197,10 @@ def trajectory_plot(qr_data, odom_data, gazebo_data):
 
 		# Plot the positions data
 		ax.plot(gazebo_data[0], gazebo_data[1], linewidth=2, label='Position-Gazebo')
-#		ax.plot(odom_data[0], odom_data[1], linewidth=2, label='Position-odom')
-		ax.plot(odom_data[0], odom_data[1], '.', markersize=5, label='Position-odom')
+		ax.plot(odom_data[0], odom_data[1], linewidth=2, label='Position-odom')
+#		ax.plot(odom_data[0], odom_data[1], '.', markersize=5, label='Position-odom')
+#		ax.plot(corrected_odom_data[0], corrected_odom_data[1], linewidth=2, label='Position-corrected-odom')
+		ax.plot(corrected_odom_data[0], corrected_odom_data[1], '.', markersize=7, label='Position-corrected-odom')
 		ax.plot(qr_data[0], qr_data[1], '.', markersize=7, label='Position-QR')
 
 		# Set the information
@@ -198,12 +209,13 @@ def trajectory_plot(qr_data, odom_data, gazebo_data):
 		ax.set_title('Robot position')
 		ax.legend()
 
+	plt.savefig("okase.png")
 	plt.show()
+	cv2.waitKey(0)
 
 
 def location_client():
 	""" Client that request the id of the qr which is being seen the to the service location.
-
 	"""
 
 	# Wait until the service is operative
@@ -220,6 +232,9 @@ def location_client():
 
 
 def main():
+
+	global corrected_odom_data
+
 	# Initialize ROS params
 	rospy.init_node('loc_controller', anonymous=True)
 	rospy.Subscriber("/odom", Odometry, callback_odom)
@@ -230,36 +245,80 @@ def main():
 	loc_msg = Pose()
 
 	pos_rob = pose()
-
-	# TODO: add the main funcionality 
+	correction = pose()
+	error_list = [[],[],[]]
+	qr_received_ant = "-1"
 	
 	while(not rospy.is_shutdown()):
 		# Location service call for actual localization
 		qr_received = location_client()
 		# Check if there is position information
 		if qr_received == "-1":
-			# 1.1. Corregir el error de la odometria actualizando el vector de error
 			if len(odom_data[0]) > 0:
-				pos_rob.x = odom_data[0][len(odom_data[0])-1]
-				pos_rob.y = odom_data[1][len(odom_data[1])-1]
-				pos_rob.theta = odom_data[2][len(odom_data[2])-1]
+				pos_rob.x = odom_data[0][len(odom_data[0])-1] - correction.x
+				pos_rob.y = odom_data[1][len(odom_data[1])-1] - correction.y
+				pos_rob.theta = odom_data[2][len(odom_data[2])-1] - correction.theta
+
+				# Add the new data
+				corrected_odom_data[0].append(pos_rob.x)
+				corrected_odom_data[1].append(pos_rob.y)
+				corrected_odom_data[2].append(pos_rob.theta)
 
 		else:
-			# 2.1. Actualizar el valor de la odometria con el vector de error
-			if len(qr_data[0]) > 0:
+			if qr_received != qr_received_ant: 
+				for e in error_list[0]:
+					error_list[0].remove(e)
+				for e in error_list[1]:
+					error_list[1].remove(e)
+				for e in error_list[2]:
+					error_list[2].remove(e)
+
+			if len(qr_data[0]) > 0 and len(odom_data[0]) > 0:
+				error_x = odom_data[0][len(odom_data[0])-1] - qr_data[0][len(qr_data[0])-1]
+				error_y = odom_data[1][len(odom_data[1])-1] - qr_data[1][len(qr_data[1])-1]
+				error_theta = odom_data[2][len(odom_data[2])-1] - qr_data[2][len(qr_data[2])-1]
+ 
+				error_list[0].append(error_x)
+				error_list[1].append(error_y)
+				error_list[2].append(error_theta)
+
+				correction.x = sum(error_list[0])/len(error_list[0])	
+				correction.y = sum(error_list[1])/len(error_list[1])	
+				correction.theta = sum(error_list[2])/len(error_list[2])	
+
+				print()
+				print("--------------------------------------------")
+				print("CORRE x: {}, y: {}, t: {}".format(correction.x, correction.y, correction.theta))
+				print("ERROR x: {}, y: {}, t: {}".format(error_x, error_y, error_theta))
+				print("ODOM  x: {}, y: {}, t: {}".format(odom_data[0][len(odom_data[0])-1], odom_data[1][len(odom_data[1])-1], odom_data[2][len(odom_data[2])-1]))
+				print("QR    x: {}, y: {}, t: {}".format(qr_data[0][len(qr_data[0])-1], qr_data[1][len(qr_data[1])-1], qr_data[2][len(qr_data[2])-1]))
+				print("--------------------------------------------")
+				print()
+
 				pos_rob.x = qr_data[0][len(qr_data[0])-1]
 				pos_rob.y = qr_data[1][len(qr_data[1])-1]
 				pos_rob.theta = qr_data[2][len(qr_data[2])-1]
 	
+#				# Add the new data
+#				corrected_odom_data[0].append(pos_rob.x)
+#				corrected_odom_data[1].append(pos_rob.y)
+#				corrected_odom_data[2].append(pos_rob.theta)
+
+			qr_received_ant = qr_received
+
+
+
 		# 3. Publicar el valor de la posicion
 #		print("{:6f},{:6f},{:6f}".format(pos_rob.x, pos_rob.y, pos_rob.theta))
 		loc_msg.position.x = pos_rob.x
 		loc_msg.position.y = pos_rob.y
 		loc_msg.orientation.z = pos_rob.theta
 
-		print(loc_msg)
+#		print(loc_msg)
 
 		loc_pub.publish(loc_msg)
+
+	trajectory_plot()
 
 
 if __name__ == '__main__':

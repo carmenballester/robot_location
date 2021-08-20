@@ -37,6 +37,16 @@
   </node>
 
   <!-- Rviz -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qr_robot_gazebo)/launch/config.rviz" />
+  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find qr_robot_gazebo)/launch/config.rviz" /> -->
+
+  <!-- Localization -->
+  <!-- <node name="qr_robot_localization" pkg="qr_robot_localization" type="localization_sim.py"/> -->
+
+  <!-- Controller -->
+  <!-- <node name="controller" pkg="qr_robot_control" type="controller_sim.py"/> -->
+
+  <!-- Localization controller -->
+  <!-- <node name="loc_controller" pkg="qr_robot_control" type="mark_sim.py"/> -->
+
 
 </launch>

@@ -259,8 +259,8 @@ def callback_image(data):
 
 	# Detect QR and display results
 	detectQR(cv_image)	
-	cv2.imshow("Results_sin_dist",cv_image)
-	cv2.waitKey(5)
+#	cv2.imshow("Results_sin_dist",cv_image)
+	cv2.waitKey(1)
 
 def handle_location(req):
 	""" Callback executed everytime the location service is called. 

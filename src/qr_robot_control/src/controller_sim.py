@@ -174,7 +174,6 @@ def callback_location(msg):
 
 def dijkstra_client():
 	""" Client that request the next node of the global planning to the service dijkstra.
-
 	"""
 
 	# Wait until the service is operative
@@ -193,7 +192,6 @@ def dijkstra_client():
 
 def location_client():
 	""" Client that request the id of the qr which is being seen the to the service location.
-
 	"""
 
 	# Wait until the service is operative
@@ -211,7 +209,6 @@ def location_client():
 
 def main():
 	""" Main function that coordinates the control and the localization.
-
 	"""
 
 	# Define global variables that are used
