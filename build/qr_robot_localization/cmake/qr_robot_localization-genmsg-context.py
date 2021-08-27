@@ -1,7 +1,7 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
 messages_str = ""
-services_str = "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv"
+services_str = "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv;/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv"
 pkg_name = "qr_robot_localization"
 dependencies_str = "std_msgs"
 langs = "gencpp;geneus;genlisp;gennodejs;genpy"

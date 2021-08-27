@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/qr_robot_localization_generate_messages_py"
+  "/home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/_DetectingQR.py"
   "/home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/_Location.py"
   "/home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/__init__.py"
 )

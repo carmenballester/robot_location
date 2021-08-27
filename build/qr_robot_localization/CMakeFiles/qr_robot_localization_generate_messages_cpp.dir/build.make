@@ -53,17 +53,26 @@ CMAKE_BINARY_DIR = /home/carmenballester/qr_robot_ws/build
 # Include the progress variables for this target.
 include qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/progress.make
 
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp: /home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization/DetectingQR.h
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp: /home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization/Location.h
 
+
+/home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization/DetectingQR.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
+/home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization/DetectingQR.h: /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv
+/home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization/DetectingQR.h: /opt/ros/kinetic/share/gencpp/msg.h.template
+/home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization/DetectingQR.h: /opt/ros/kinetic/share/gencpp/srv.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from qr_robot_localization/DetectingQR.srv"
+	cd /home/carmenballester/qr_robot_ws/src/qr_robot_localization && /home/carmenballester/qr_robot_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p qr_robot_localization -o /home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 /home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization/Location.h: /opt/ros/kinetic/lib/gencpp/gen_cpp.py
 /home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization/Location.h: /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv
 /home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization/Location.h: /opt/ros/kinetic/share/gencpp/msg.h.template
 /home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization/Location.h: /opt/ros/kinetic/share/gencpp/srv.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from qr_robot_localization/Location.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from qr_robot_localization/Location.srv"
 	cd /home/carmenballester/qr_robot_ws/src/qr_robot_localization && /home/carmenballester/qr_robot_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p qr_robot_localization -o /home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization -e /opt/ros/kinetic/share/gencpp/cmake/..
 
 qr_robot_localization_generate_messages_cpp: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp
+qr_robot_localization_generate_messages_cpp: /home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization/DetectingQR.h
 qr_robot_localization_generate_messages_cpp: /home/carmenballester/qr_robot_ws/devel/include/qr_robot_localization/Location.h
 qr_robot_localization_generate_messages_cpp: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/build.make
 

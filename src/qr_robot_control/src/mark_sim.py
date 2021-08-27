@@ -52,6 +52,8 @@ graph = {'O':[0.5,0.0],
 
 # Define program variables
 qr_received = False
+qr_detected = False
+qr_added = False
 
 # Define representation variables
 odom_data = [[],[],[]]
@@ -104,8 +106,9 @@ def callback_qr(msg):
 	"""
 
 	global qr_data
-	global aux_odom_data
-	global odom_data
+	global qr_added
+
+	qr_added = True
 
 	# Define the pose of the robot from the message received
 	pos_rob = pose(msg.position.x, msg.position.y, msg.orientation.z)
@@ -115,6 +118,9 @@ def callback_qr(msg):
 	qr_data[1].append(pos_rob.y)
 	qr_data[2].append(pos_rob.theta)
 
+#	print("QR added! Total data: {}".format(len(qr_data[0])))
+
+	qr_added = False
 
 def callback_odom(msg):
 	""" Callback executed everytime a pose is published in the topic /odom
@@ -126,7 +132,28 @@ def callback_odom(msg):
 	"""
 
 	global odom_data
+	global qr_detected
+	global qr_added
 
+	# COMPROBAR QUE SE ESTa LEYENDO UN CoDIGO QR
+#	if qr_detected: 
+#		# COMPROBAR CUANDO SE AnADE UN QR Y AnADIR TB UN ODOM
+#		if qr_added:
+#			# Convert the orientation received to eulers angles
+#			euler = euler_from_quaternion(msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, msg.pose.pose.orientation.z, msg.pose.pose.orientation.w)
+#			
+#			# Define the pose of the robot from the message received
+#			pos_rob = pose(msg.pose.pose.position.x, msg.pose.pose.position.y, euler[2])
+#		
+#			# Add the new data
+#			odom_data[0].append(pos_rob.x)
+#			odom_data[1].append(pos_rob.y)
+#			odom_data[2].append(pos_rob.theta)
+#
+##			print("Odom added! Total data: {}".format(len(odom_data[0])))
+#			
+#
+#	else: 	
 	# Convert the orientation received to eulers angles
 	euler = euler_from_quaternion(msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, msg.pose.pose.orientation.z, msg.pose.pose.orientation.w)
 	
@@ -137,6 +164,8 @@ def callback_odom(msg):
 	odom_data[0].append(pos_rob.x)
 	odom_data[1].append(pos_rob.y)
 	odom_data[2].append(pos_rob.theta)
+
+#		print("This should not be here :(")
 
 
 def callback_gazebo(msg):
@@ -214,17 +243,17 @@ def trajectory_plot():
 	cv2.waitKey(0)
 
 
-def location_client():
+def detecting_qr_client():
 	""" Client that request the id of the qr which is being seen the to the service location.
 	"""
 
 	# Wait until the service is operative
-	rospy.wait_for_service('location')
+	rospy.wait_for_service('detecting_qr')
 	try: 
 		# Define the service proxy for using it
-		location = rospy.ServiceProxy('location', Location)
+		detecting_qr = rospy.ServiceProxy('detecting_qr', DetectingQR)
 		# Get the value of the last qr and return it to the main function
-		resp = location()
+		resp = detecting_qr()
 		return resp.node
 
 	except rospy.ServiceException as e:
@@ -233,7 +262,11 @@ def location_client():
 
 def main():
 
+	global odom_data
+	global qr_data
+
 	global corrected_odom_data
+	global qr_detected
 
 	# Initialize ROS params
 	rospy.init_node('loc_controller', anonymous=True)
@@ -246,14 +279,24 @@ def main():
 
 	pos_rob = pose()
 	correction = pose()
-	error_list = [[],[],[]]
 	qr_received_ant = "-1"
 	
 	while(not rospy.is_shutdown()):
 		# Location service call for actual localization
-		qr_received = location_client()
+		qr_received = detecting_qr_client()
+#	print(qr_received)
+
 		# Check if there is position information
+#		if qr_received == "-1" and qr_received_ant != "-1":
+#			print("--------------------------------------------")
+#			print("ODOM DATA: {}".format(len(odom_data[0])))
+#			print("QR   DATA: {}".format(len(qr_data[0])))
+#			print("--------------------------------------------")
+#			print("")
+
 		if qr_received == "-1":
+			qr_detected = False
+
 			if len(odom_data[0]) > 0:
 				pos_rob.x = odom_data[0][len(odom_data[0])-1] - correction.x
 				pos_rob.y = odom_data[1][len(odom_data[1])-1] - correction.y
@@ -265,35 +308,29 @@ def main():
 				corrected_odom_data[2].append(pos_rob.theta)
 
 		else:
-			if qr_received != qr_received_ant: 
-				for e in error_list[0]:
-					error_list[0].remove(e)
-				for e in error_list[1]:
-					error_list[1].remove(e)
-				for e in error_list[2]:
-					error_list[2].remove(e)
+			qr_detected = True
+			
+#			if qr_received != qr_received_ant: 
+				# mientas se esta detectando QR capar la frecuencia de la odometria
+#				print("--------------------------------------------")
+#				print("ODOM DATA: {}".format(len(odom_data[0])))
+#				print("QR   DATA: {}".format(len(qr_data[0])))
+#				print("--------------------------------------------")
+#				print("")
+
 
 			if len(qr_data[0]) > 0 and len(odom_data[0]) > 0:
-				error_x = odom_data[0][len(odom_data[0])-1] - qr_data[0][len(qr_data[0])-1]
-				error_y = odom_data[1][len(odom_data[1])-1] - qr_data[1][len(qr_data[1])-1]
-				error_theta = odom_data[2][len(odom_data[2])-1] - qr_data[2][len(qr_data[2])-1]
+				correction.x = odom_data[0][len(odom_data[0])-1] - qr_data[0][len(qr_data[0])-1]
+				correction.y = odom_data[1][len(odom_data[1])-1] - qr_data[1][len(qr_data[1])-1]
+				correction.theta = odom_data[2][len(odom_data[2])-1] - qr_data[2][len(qr_data[2])-1]
  
-				error_list[0].append(error_x)
-				error_list[1].append(error_y)
-				error_list[2].append(error_theta)
-
-				correction.x = sum(error_list[0])/len(error_list[0])	
-				correction.y = sum(error_list[1])/len(error_list[1])	
-				correction.theta = sum(error_list[2])/len(error_list[2])	
-
-				print()
 				print("--------------------------------------------")
-				print("CORRE x: {}, y: {}, t: {}".format(correction.x, correction.y, correction.theta))
-				print("ERROR x: {}, y: {}, t: {}".format(error_x, error_y, error_theta))
+				print("ERR x: {}, y: {}, t: {}".format(correction.x, correction.y, correction.theta))
 				print("ODOM  x: {}, y: {}, t: {}".format(odom_data[0][len(odom_data[0])-1], odom_data[1][len(odom_data[1])-1], odom_data[2][len(odom_data[2])-1]))
 				print("QR    x: {}, y: {}, t: {}".format(qr_data[0][len(qr_data[0])-1], qr_data[1][len(qr_data[1])-1], qr_data[2][len(qr_data[2])-1]))
 				print("--------------------------------------------")
-				print()
+				print("")
+
 
 				pos_rob.x = qr_data[0][len(qr_data[0])-1]
 				pos_rob.y = qr_data[1][len(qr_data[1])-1]

@@ -53,15 +53,22 @@ CMAKE_BINARY_DIR = /home/carmenballester/qr_robot_ws/build
 # Include the progress variables for this target.
 include qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/progress.make
 
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs: /home/carmenballester/qr_robot_ws/devel/share/gennodejs/ros/qr_robot_localization/srv/DetectingQR.js
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs: /home/carmenballester/qr_robot_ws/devel/share/gennodejs/ros/qr_robot_localization/srv/Location.js
 
 
+/home/carmenballester/qr_robot_ws/devel/share/gennodejs/ros/qr_robot_localization/srv/DetectingQR.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
+/home/carmenballester/qr_robot_ws/devel/share/gennodejs/ros/qr_robot_localization/srv/DetectingQR.js: /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from qr_robot_localization/DetectingQR.srv"
+	cd /home/carmenballester/qr_robot_ws/build/qr_robot_localization && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p qr_robot_localization -o /home/carmenballester/qr_robot_ws/devel/share/gennodejs/ros/qr_robot_localization/srv
+
 /home/carmenballester/qr_robot_ws/devel/share/gennodejs/ros/qr_robot_localization/srv/Location.js: /opt/ros/kinetic/lib/gennodejs/gen_nodejs.py
 /home/carmenballester/qr_robot_ws/devel/share/gennodejs/ros/qr_robot_localization/srv/Location.js: /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Javascript code from qr_robot_localization/Location.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from qr_robot_localization/Location.srv"
 	cd /home/carmenballester/qr_robot_ws/build/qr_robot_localization && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p qr_robot_localization -o /home/carmenballester/qr_robot_ws/devel/share/gennodejs/ros/qr_robot_localization/srv
 
 qr_robot_localization_generate_messages_nodejs: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs
+qr_robot_localization_generate_messages_nodejs: /home/carmenballester/qr_robot_ws/devel/share/gennodejs/ros/qr_robot_localization/srv/DetectingQR.js
 qr_robot_localization_generate_messages_nodejs: /home/carmenballester/qr_robot_ws/devel/share/gennodejs/ros/qr_robot_localization/srv/Location.js
 qr_robot_localization_generate_messages_nodejs: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/build.make
 

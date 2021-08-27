@@ -1352,18 +1352,19 @@ qr_robot_localization/all: qr_robot_localization/CMakeFiles/qr_robot_localizatio
 .PHONY : qr_robot_localization/all
 
 # Convenience name for "clean" pass in the directory.
+qr_robot_localization/clean: qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/clean
 qr_robot_localization/clean: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/clean
 qr_robot_localization/clean: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/clean
 qr_robot_localization/clean: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_Location.dir/clean
+qr_robot_localization/clean: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/clean
 qr_robot_localization/clean: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/clean
 qr_robot_localization/clean: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/clean
 qr_robot_localization/clean: qr_robot_localization/CMakeFiles/qr_robot_localization_geneus.dir/clean
 qr_robot_localization/clean: qr_robot_localization/CMakeFiles/qr_robot_localization_genpy.dir/clean
+qr_robot_localization/clean: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/clean
 qr_robot_localization/clean: qr_robot_localization/CMakeFiles/qr_robot_localization_genlisp.dir/clean
 qr_robot_localization/clean: qr_robot_localization/CMakeFiles/qr_robot_localization_gencpp.dir/clean
 qr_robot_localization/clean: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/clean
-qr_robot_localization/clean: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/clean
-qr_robot_localization/clean: qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/clean
 
 .PHONY : qr_robot_localization/clean
 
@@ -1373,19 +1374,52 @@ qr_robot_localization/preinstall:
 .PHONY : qr_robot_localization/preinstall
 
 #=============================================================================
+# Target rules for target qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir
+
+# All Build rule for target.
+qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/all: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/all
+	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/depend
+	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num= "Built target qr_robot_localization_gennodejs"
+.PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/all
+
+# Build rule for subdir invocation for target.
+qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
+.PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/rule
+
+# Convenience name for target.
+qr_robot_localization_gennodejs: qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/rule
+
+.PHONY : qr_robot_localization_gennodejs
+
+# clean rule for target.
+qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/clean:
+	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/clean
+.PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/clean
+
+# clean rule for target.
+clean: qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir
 
 # All Build rule for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/all: qr_robot_control/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/all: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_Location.dir/all
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/all: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/all
 	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/depend
 	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=19 "Built target qr_robot_localization_generate_messages_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=19,20 "Built target qr_robot_localization_generate_messages_cpp"
 .PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
 .PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/rule
@@ -1411,14 +1445,15 @@ clean: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_
 # All Build rule for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/all: qr_robot_control/CMakeFiles/std_msgs_generate_messages_py.dir/all
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/all: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_Location.dir/all
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/all: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/all
 	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/depend
 	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=24,25 "Built target qr_robot_localization_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=28,29,30 "Built target qr_robot_localization_generate_messages_py"
 .PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
 .PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/rule
@@ -1471,14 +1506,48 @@ clean: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir
+
+# All Build rule for target.
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/all: qr_robot_control/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/all: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_Location.dir/all
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/all: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/all
+	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/depend
+	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=26,27 "Built target qr_robot_localization_generate_messages_nodejs"
+.PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/all
+
+# Build rule for subdir invocation for target.
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
+.PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+qr_robot_localization_generate_messages_nodejs: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/rule
+
+.PHONY : qr_robot_localization_generate_messages_nodejs
+
+# clean rule for target.
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/clean:
+	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/clean
+.PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/clean
+
+# clean rule for target.
+clean: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir
 
 # All Build rule for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/all: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_cpp.dir/all
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/all: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/all
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/all: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/all
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/all: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/all
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/all: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/all
-qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/all: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/all
 	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/depend
 	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num= "Built target qr_robot_localization_generate_messages"
@@ -1491,7 +1560,7 @@ all: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.di
 
 # Build rule for subdir invocation for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
 .PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.dir/rule
@@ -1517,14 +1586,15 @@ clean: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages.
 # All Build rule for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/all: qr_robot_control/CMakeFiles/std_msgs_generate_messages_eus.dir/all
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/all: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_Location.dir/all
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/all: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/all
 	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/depend
 	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=20,21 "Built target qr_robot_localization_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=21,22,23 "Built target qr_robot_localization_generate_messages_eus"
 .PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
 .PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/rule
@@ -1556,7 +1626,7 @@ qr_robot_localization/CMakeFiles/qr_robot_localization_geneus.dir/all: qr_robot_
 
 # Build rule for subdir invocation for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_geneus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/qr_robot_localization_geneus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
 .PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_geneus.dir/rule
@@ -1588,7 +1658,7 @@ qr_robot_localization/CMakeFiles/qr_robot_localization_genpy.dir/all: qr_robot_l
 
 # Build rule for subdir invocation for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_genpy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/qr_robot_localization_genpy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
 .PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_genpy.dir/rule
@@ -1609,6 +1679,38 @@ clean: qr_robot_localization/CMakeFiles/qr_robot_localization_genpy.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir
+
+# All Build rule for target.
+qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/all:
+	$(MAKE) -f qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/build.make qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/depend
+	$(MAKE) -f qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/build.make qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num= "Built target _qr_robot_localization_generate_messages_check_deps_DetectingQR"
+.PHONY : qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/all
+
+# Build rule for subdir invocation for target.
+qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
+.PHONY : qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/rule
+
+# Convenience name for target.
+_qr_robot_localization_generate_messages_check_deps_DetectingQR: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/rule
+
+.PHONY : _qr_robot_localization_generate_messages_check_deps_DetectingQR
+
+# clean rule for target.
+qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/clean:
+	$(MAKE) -f qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/build.make qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/clean
+.PHONY : qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/clean
+
+# clean rule for target.
+clean: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target qr_robot_localization/CMakeFiles/qr_robot_localization_genlisp.dir
 
 # All Build rule for target.
@@ -1620,7 +1722,7 @@ qr_robot_localization/CMakeFiles/qr_robot_localization_genlisp.dir/all: qr_robot
 
 # Build rule for subdir invocation for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_genlisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/qr_robot_localization_genlisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
 .PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_genlisp.dir/rule
@@ -1652,7 +1754,7 @@ qr_robot_localization/CMakeFiles/qr_robot_localization_gencpp.dir/all: qr_robot_
 
 # Build rule for subdir invocation for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_gencpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/qr_robot_localization_gencpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
 .PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_gencpp.dir/rule
@@ -1678,14 +1780,15 @@ clean: qr_robot_localization/CMakeFiles/qr_robot_localization_gencpp.dir/clean
 # All Build rule for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/all: qr_robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/all: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_Location.dir/all
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/all: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_DetectingQR.dir/all
 	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/depend
 	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=22 "Built target qr_robot_localization_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=24,25 "Built target qr_robot_localization_generate_messages_lisp"
 .PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
 .PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/rule
@@ -1702,71 +1805,6 @@ qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.di
 
 # clean rule for target.
 clean: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_lisp.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir
-
-# All Build rule for target.
-qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/all: qr_robot_control/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
-qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/all: qr_robot_localization/CMakeFiles/_qr_robot_localization_generate_messages_check_deps_Location.dir/all
-	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/depend
-	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=23 "Built target qr_robot_localization_generate_messages_nodejs"
-.PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/all
-
-# Build rule for subdir invocation for target.
-qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 1
-	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
-.PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-qr_robot_localization_generate_messages_nodejs: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/rule
-
-.PHONY : qr_robot_localization_generate_messages_nodejs
-
-# clean rule for target.
-qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/clean:
-	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/clean
-.PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/clean
-
-# clean rule for target.
-clean: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir
-
-# All Build rule for target.
-qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/all: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_nodejs.dir/all
-	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/depend
-	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num= "Built target qr_robot_localization_gennodejs"
-.PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/all
-
-# Build rule for subdir invocation for target.
-qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 1
-	$(MAKE) -f CMakeFiles/Makefile2 qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/carmenballester/qr_robot_ws/build/CMakeFiles 0
-.PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/rule
-
-# Convenience name for target.
-qr_robot_localization_gennodejs: qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/rule
-
-.PHONY : qr_robot_localization_gennodejs
-
-# clean rule for target.
-qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/clean:
-	$(MAKE) -f qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/build.make qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/clean
-.PHONY : qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/clean
-
-# clean rule for target.
-clean: qr_robot_localization/CMakeFiles/qr_robot_localization_gennodejs.dir/clean
 
 .PHONY : clean
 

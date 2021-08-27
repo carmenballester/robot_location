@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "qr_robot_localization: 0 messages, 1 services")
+message(STATUS "qr_robot_localization: 0 messages, 2 services")
 
 set(MSG_I_FLAGS "-Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg")
 
@@ -17,6 +17,11 @@ add_custom_target(qr_robot_localization_generate_messages ALL)
 
 
 
+get_filename_component(_filename "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv" NAME_WE)
+add_custom_target(_qr_robot_localization_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "qr_robot_localization" "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv" ""
+)
+
 get_filename_component(_filename "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv" NAME_WE)
 add_custom_target(_qr_robot_localization_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "qr_robot_localization" "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv" ""
@@ -30,6 +35,12 @@ add_custom_target(_qr_robot_localization_generate_messages_check_deps_${_filenam
 ### Generating Messages
 
 ### Generating Services
+_generate_srv_cpp(qr_robot_localization
+  "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/qr_robot_localization
+)
 _generate_srv_cpp(qr_robot_localization
   "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv"
   "${MSG_I_FLAGS}"
@@ -49,6 +60,8 @@ add_custom_target(qr_robot_localization_generate_messages_cpp
 add_dependencies(qr_robot_localization_generate_messages qr_robot_localization_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv" NAME_WE)
+add_dependencies(qr_robot_localization_generate_messages_cpp _qr_robot_localization_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv" NAME_WE)
 add_dependencies(qr_robot_localization_generate_messages_cpp _qr_robot_localization_generate_messages_check_deps_${_filename})
 
@@ -63,6 +76,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS qr_robot_localization_generate_mess
 ### Generating Messages
 
 ### Generating Services
+_generate_srv_eus(qr_robot_localization
+  "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/qr_robot_localization
+)
 _generate_srv_eus(qr_robot_localization
   "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv"
   "${MSG_I_FLAGS}"
@@ -82,6 +101,8 @@ add_custom_target(qr_robot_localization_generate_messages_eus
 add_dependencies(qr_robot_localization_generate_messages qr_robot_localization_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv" NAME_WE)
+add_dependencies(qr_robot_localization_generate_messages_eus _qr_robot_localization_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv" NAME_WE)
 add_dependencies(qr_robot_localization_generate_messages_eus _qr_robot_localization_generate_messages_check_deps_${_filename})
 
@@ -96,6 +117,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS qr_robot_localization_generate_mess
 ### Generating Messages
 
 ### Generating Services
+_generate_srv_lisp(qr_robot_localization
+  "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/qr_robot_localization
+)
 _generate_srv_lisp(qr_robot_localization
   "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv"
   "${MSG_I_FLAGS}"
@@ -115,6 +142,8 @@ add_custom_target(qr_robot_localization_generate_messages_lisp
 add_dependencies(qr_robot_localization_generate_messages qr_robot_localization_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv" NAME_WE)
+add_dependencies(qr_robot_localization_generate_messages_lisp _qr_robot_localization_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv" NAME_WE)
 add_dependencies(qr_robot_localization_generate_messages_lisp _qr_robot_localization_generate_messages_check_deps_${_filename})
 
@@ -129,6 +158,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS qr_robot_localization_generate_mess
 ### Generating Messages
 
 ### Generating Services
+_generate_srv_nodejs(qr_robot_localization
+  "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/qr_robot_localization
+)
 _generate_srv_nodejs(qr_robot_localization
   "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv"
   "${MSG_I_FLAGS}"
@@ -148,6 +183,8 @@ add_custom_target(qr_robot_localization_generate_messages_nodejs
 add_dependencies(qr_robot_localization_generate_messages qr_robot_localization_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv" NAME_WE)
+add_dependencies(qr_robot_localization_generate_messages_nodejs _qr_robot_localization_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv" NAME_WE)
 add_dependencies(qr_robot_localization_generate_messages_nodejs _qr_robot_localization_generate_messages_check_deps_${_filename})
 
@@ -162,6 +199,12 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS qr_robot_localization_generate_mess
 ### Generating Messages
 
 ### Generating Services
+_generate_srv_py(qr_robot_localization
+  "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/qr_robot_localization
+)
 _generate_srv_py(qr_robot_localization
   "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv"
   "${MSG_I_FLAGS}"
@@ -181,6 +224,8 @@ add_custom_target(qr_robot_localization_generate_messages_py
 add_dependencies(qr_robot_localization_generate_messages qr_robot_localization_generate_messages_py)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv" NAME_WE)
+add_dependencies(qr_robot_localization_generate_messages_py _qr_robot_localization_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv" NAME_WE)
 add_dependencies(qr_robot_localization_generate_messages_py _qr_robot_localization_generate_messages_check_deps_${_filename})
 

@@ -94,7 +94,7 @@ traj = vector(init, goal)
 kd = 1
 kalp = 0.5
 kv = 1
-v_max = 0.25
+v_max = 0.10
 
 
 def mag(x):
@@ -169,7 +169,7 @@ def callback_location(msg):
 		vel_pub.publish(vel_msg)
 
 		# Check if the goal has been reached
-		goal_reached = True if em<0.3 else False
+		goal_reached = True if em<0.1 else False
 
 
 def dijkstra_client():

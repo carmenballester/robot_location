@@ -20,6 +20,7 @@ from geometry_msgs.msg import Pose
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 from qr_robot_localization.srv import Location, LocationResponse
+from qr_robot_localization.srv import DetectingQR, DetectingQRResponse
 
 # Define fx and fy from calibration 
 fx = 1050.00
@@ -27,6 +28,7 @@ fy = 1050.00
 dist_x = 0.23
 dist_y = 0.00
 qr_id = "-1"	
+last_qr_id = "-1"
 
 pub = rospy.Publisher('/qr_location', Pose, queue_size=10)
 
@@ -118,6 +120,7 @@ def detectQR(frame):
 	global fy
 	global dist
 	global qr_id
+	global last_qr_id
 
 	# Convert frame to BW and get its size
 	frameGrey = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -155,6 +158,7 @@ def detectQR(frame):
 			# REAL VALUES
 			# Id of the QR
 			qr_id = tag[1]
+			last_qr_id = tag[1]
 			# Inicialite values for getting the coordinates from the tag
 			pri = 3 
 			fin = 0
@@ -272,8 +276,21 @@ def handle_location(req):
 	"""
 
 	# Get the id of the last QR seen and send it
+	global last_qr_id
+	return LocationResponse(last_qr_id)
+
+def handle_detecting_qr(req):
+	""" Callback executed everytime the location service is called. 
+
+	Parameters
+	----------
+	req : none
+
+	"""
+
+	# Get the id of the last QR seen and send it
 	global qr_id
-	return LocationResponse(qr_id)
+	return DetectingQRResponse(qr_id)
 
 def main():
 	""" Main function where ROS parameters are initialized. 
@@ -283,6 +300,7 @@ def main():
 	rospy.init_node('qr_robot_localization', anonymous=True)
 	rospy.Subscriber("qr_robot/wide_camera/image_raw", Image, callback_image)
 	rospy.Service('location', Location, handle_location)
+	rospy.Service('detecting_qr', DetectingQR, handle_detecting_qr)
 
 	rospy.spin()
 

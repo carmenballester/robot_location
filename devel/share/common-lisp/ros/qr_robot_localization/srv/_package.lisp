@@ -1,6 +1,11 @@
 (cl:defpackage qr_robot_localization-srv
   (:use )
   (:export
+   "DETECTINGQR"
+   "<DETECTINGQR-REQUEST>"
+   "DETECTINGQR-REQUEST"
+   "<DETECTINGQR-RESPONSE>"
+   "DETECTINGQR-RESPONSE"
    "LOCATION"
    "<LOCATION-REQUEST>"
    "LOCATION-REQUEST"

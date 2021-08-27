@@ -53,20 +53,27 @@ CMAKE_BINARY_DIR = /home/carmenballester/qr_robot_ws/build
 # Include the progress variables for this target.
 include qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/progress.make
 
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus: /home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization/srv/DetectingQR.l
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus: /home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization/srv/Location.l
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus: /home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization/manifest.l
 
 
+/home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization/srv/DetectingQR.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
+/home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization/srv/DetectingQR.l: /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from qr_robot_localization/DetectingQR.srv"
+	cd /home/carmenballester/qr_robot_ws/build/qr_robot_localization && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p qr_robot_localization -o /home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization/srv
+
 /home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization/srv/Location.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
 /home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization/srv/Location.l: /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from qr_robot_localization/Location.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from qr_robot_localization/Location.srv"
 	cd /home/carmenballester/qr_robot_ws/build/qr_robot_localization && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p qr_robot_localization -o /home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization/srv
 
 /home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization/manifest.l: /opt/ros/kinetic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp manifest code for qr_robot_localization"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp manifest code for qr_robot_localization"
 	cd /home/carmenballester/qr_robot_ws/build/qr_robot_localization && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization qr_robot_localization std_msgs
 
 qr_robot_localization_generate_messages_eus: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus
+qr_robot_localization_generate_messages_eus: /home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization/srv/DetectingQR.l
 qr_robot_localization_generate_messages_eus: /home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization/srv/Location.l
 qr_robot_localization_generate_messages_eus: /home/carmenballester/qr_robot_ws/devel/share/roseus/ros/qr_robot_localization/manifest.l
 qr_robot_localization_generate_messages_eus: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_eus.dir/build.make

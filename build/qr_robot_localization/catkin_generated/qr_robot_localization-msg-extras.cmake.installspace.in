@@ -1,2 +1,2 @@
 set(qr_robot_localization_MESSAGE_FILES "")
-set(qr_robot_localization_SERVICE_FILES "srv/Location.srv")
+set(qr_robot_localization_SERVICE_FILES "srv/Location.srv;srv/DetectingQR.srv")

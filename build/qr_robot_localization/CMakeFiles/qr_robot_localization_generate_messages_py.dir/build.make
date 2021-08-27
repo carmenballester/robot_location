@@ -53,21 +53,29 @@ CMAKE_BINARY_DIR = /home/carmenballester/qr_robot_ws/build
 # Include the progress variables for this target.
 include qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/progress.make
 
+qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py: /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/_DetectingQR.py
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py: /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/_Location.py
 qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py: /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/__init__.py
 
 
+/home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/_DetectingQR.py: /opt/ros/kinetic/lib/genpy/gensrv_py.py
+/home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/_DetectingQR.py: /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python code from SRV qr_robot_localization/DetectingQR"
+	cd /home/carmenballester/qr_robot_ws/build/qr_robot_localization && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p qr_robot_localization -o /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv
+
 /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/_Location.py: /opt/ros/kinetic/lib/genpy/gensrv_py.py
 /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/_Location.py: /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating Python code from SRV qr_robot_localization/Location"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python code from SRV qr_robot_localization/Location"
 	cd /home/carmenballester/qr_robot_ws/build/qr_robot_localization && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/gensrv_py.py /home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv -Istd_msgs:/opt/ros/kinetic/share/std_msgs/cmake/../msg -p qr_robot_localization -o /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv
 
 /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/__init__.py: /opt/ros/kinetic/lib/genpy/genmsg_py.py
+/home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/__init__.py: /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/_DetectingQR.py
 /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/__init__.py: /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/_Location.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python srv __init__.py for qr_robot_localization"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/carmenballester/qr_robot_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating Python srv __init__.py for qr_robot_localization"
 	cd /home/carmenballester/qr_robot_ws/build/qr_robot_localization && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/kinetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py -o /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv --initpy
 
 qr_robot_localization_generate_messages_py: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py
+qr_robot_localization_generate_messages_py: /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/_DetectingQR.py
 qr_robot_localization_generate_messages_py: /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/_Location.py
 qr_robot_localization_generate_messages_py: /home/carmenballester/qr_robot_ws/devel/lib/python2.7/dist-packages/qr_robot_localization/srv/__init__.py
 qr_robot_localization_generate_messages_py: qr_robot_localization/CMakeFiles/qr_robot_localization_generate_messages_py.dir/build.make

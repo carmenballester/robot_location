@@ -33,7 +33,10 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/qr_robot_localization/srv" TYPE FILE FILES "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/qr_robot_localization/srv" TYPE FILE FILES
+    "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/Location.srv"
+    "/home/carmenballester/qr_robot_ws/src/qr_robot_localization/srv/DetectingQR.srv"
+    )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
