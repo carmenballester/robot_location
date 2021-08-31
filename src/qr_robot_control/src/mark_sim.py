@@ -52,8 +52,6 @@ graph = {'O':[0.5,0.0],
 
 # Define program variables
 qr_received = False
-qr_detected = False
-qr_added = False
 
 # Define representation variables
 odom_data = [[],[],[]]
@@ -108,8 +106,6 @@ def callback_qr(msg):
 	global qr_data
 	global qr_added
 
-	qr_added = True
-
 	# Define the pose of the robot from the message received
 	pos_rob = pose(msg.position.x, msg.position.y, msg.orientation.z)
 
@@ -120,7 +116,6 @@ def callback_qr(msg):
 
 #	print("QR added! Total data: {}".format(len(qr_data[0])))
 
-	qr_added = False
 
 def callback_odom(msg):
 	""" Callback executed everytime a pose is published in the topic /odom
@@ -132,28 +127,7 @@ def callback_odom(msg):
 	"""
 
 	global odom_data
-	global qr_detected
-	global qr_added
 
-	# COMPROBAR QUE SE ESTa LEYENDO UN CoDIGO QR
-#	if qr_detected: 
-#		# COMPROBAR CUANDO SE AnADE UN QR Y AnADIR TB UN ODOM
-#		if qr_added:
-#			# Convert the orientation received to eulers angles
-#			euler = euler_from_quaternion(msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, msg.pose.pose.orientation.z, msg.pose.pose.orientation.w)
-#			
-#			# Define the pose of the robot from the message received
-#			pos_rob = pose(msg.pose.pose.position.x, msg.pose.pose.position.y, euler[2])
-#		
-#			# Add the new data
-#			odom_data[0].append(pos_rob.x)
-#			odom_data[1].append(pos_rob.y)
-#			odom_data[2].append(pos_rob.theta)
-#
-##			print("Odom added! Total data: {}".format(len(odom_data[0])))
-#			
-#
-#	else: 	
 	# Convert the orientation received to eulers angles
 	euler = euler_from_quaternion(msg.pose.pose.orientation.x, msg.pose.pose.orientation.y, msg.pose.pose.orientation.z, msg.pose.pose.orientation.w)
 	
@@ -164,8 +138,6 @@ def callback_odom(msg):
 	odom_data[0].append(pos_rob.x)
 	odom_data[1].append(pos_rob.y)
 	odom_data[2].append(pos_rob.theta)
-
-#		print("This should not be here :(")
 
 
 def callback_gazebo(msg):
@@ -225,11 +197,11 @@ def trajectory_plot():
 		ax.plot(qr_mark[0], qr_mark[1], 'kx', markersize=15,)
 
 		# Plot the positions data
-		ax.plot(gazebo_data[0], gazebo_data[1], linewidth=2, label='Position-Gazebo')
 		ax.plot(odom_data[0], odom_data[1], linewidth=2, label='Position-odom')
-#		ax.plot(odom_data[0], odom_data[1], '.', markersize=5, label='Position-odom')
+		ax.plot(gazebo_data[0], gazebo_data[1], linewidth=2, label='Position-Gazebo')
 #		ax.plot(corrected_odom_data[0], corrected_odom_data[1], linewidth=2, label='Position-corrected-odom')
-		ax.plot(corrected_odom_data[0], corrected_odom_data[1], '.', markersize=7, label='Position-corrected-odom')
+#		ax.plot(odom_data[0], odom_data[1], '.', markersize=5, label='Position-odom')
+		ax.plot(corrected_odom_data[0], corrected_odom_data[1], '.', markersize=4, label='Position-corrected-odom')
 		ax.plot(qr_data[0], qr_data[1], '.', markersize=7, label='Position-QR')
 
 		# Set the information
@@ -264,9 +236,7 @@ def main():
 
 	global odom_data
 	global qr_data
-
 	global corrected_odom_data
-	global qr_detected
 
 	# Initialize ROS params
 	rospy.init_node('loc_controller', anonymous=True)
@@ -280,23 +250,23 @@ def main():
 	pos_rob = pose()
 	correction = pose()
 	qr_received_ant = "-1"
+	errs = [[],[],[]]
 	
 	while(not rospy.is_shutdown()):
 		# Location service call for actual localization
 		qr_received = detecting_qr_client()
-#	print(qr_received)
 
 		# Check if there is position information
-#		if qr_received == "-1" and qr_received_ant != "-1":
-#			print("--------------------------------------------")
-#			print("ODOM DATA: {}".format(len(odom_data[0])))
-#			print("QR   DATA: {}".format(len(qr_data[0])))
-#			print("--------------------------------------------")
-#			print("")
+		if qr_received == "-1" and qr_received_ant != "-1":
+			for e in errs[0]:
+				errs[0].remove(e)
+			for e in errs[1]:
+				errs[1].remove(e)
+			for e in errs[2]:
+				errs[2].remove(e)
+
 
 		if qr_received == "-1":
-			qr_detected = False
-
 			if len(odom_data[0]) > 0:
 				pos_rob.x = odom_data[0][len(odom_data[0])-1] - correction.x
 				pos_rob.y = odom_data[1][len(odom_data[1])-1] - correction.y
@@ -308,24 +278,22 @@ def main():
 				corrected_odom_data[2].append(pos_rob.theta)
 
 		else:
-			qr_detected = True
-			
-#			if qr_received != qr_received_ant: 
-				# mientas se esta detectando QR capar la frecuencia de la odometria
-#				print("--------------------------------------------")
-#				print("ODOM DATA: {}".format(len(odom_data[0])))
-#				print("QR   DATA: {}".format(len(qr_data[0])))
-#				print("--------------------------------------------")
-#				print("")
-
-
 			if len(qr_data[0]) > 0 and len(odom_data[0]) > 0:
-				correction.x = odom_data[0][len(odom_data[0])-1] - qr_data[0][len(qr_data[0])-1]
-				correction.y = odom_data[1][len(odom_data[1])-1] - qr_data[1][len(qr_data[1])-1]
-				correction.theta = odom_data[2][len(odom_data[2])-1] - qr_data[2][len(qr_data[2])-1]
+				err_x = odom_data[0][len(odom_data[0])-1] - qr_data[0][len(qr_data[0])-1]
+				err_y = odom_data[1][len(odom_data[1])-1] - qr_data[1][len(qr_data[1])-1]
+				err_t = odom_data[2][len(odom_data[2])-1] - qr_data[2][len(qr_data[2])-1]
+
+				errs[0].append(err_x)
+				errs[1].append(err_y)
+				errs[2].append(err_t)
+
+				correction.x = sum(errs[0])/len(errs[0])
+				correction.y = sum(errs[1])/len(errs[1])
+				correction.theta = sum(errs[2])/len(errs[2])
  
 				print("--------------------------------------------")
-				print("ERR x: {}, y: {}, t: {}".format(correction.x, correction.y, correction.theta))
+				print("CORR  x: {}, y: {}, t: {}".format(correction.x, correction.y, correction.theta))
+				print("ERROR x: {}, y: {}, t: {}".format(err_x, err_y, err_t))
 				print("ODOM  x: {}, y: {}, t: {}".format(odom_data[0][len(odom_data[0])-1], odom_data[1][len(odom_data[1])-1], odom_data[2][len(odom_data[2])-1]))
 				print("QR    x: {}, y: {}, t: {}".format(qr_data[0][len(qr_data[0])-1], qr_data[1][len(qr_data[1])-1], qr_data[2][len(qr_data[2])-1]))
 				print("--------------------------------------------")
@@ -337,9 +305,9 @@ def main():
 				pos_rob.theta = qr_data[2][len(qr_data[2])-1]
 	
 #				# Add the new data
-#				corrected_odom_data[0].append(pos_rob.x)
-#				corrected_odom_data[1].append(pos_rob.y)
-#				corrected_odom_data[2].append(pos_rob.theta)
+				corrected_odom_data[0].append(pos_rob.x)
+				corrected_odom_data[1].append(pos_rob.y)
+				corrected_odom_data[2].append(pos_rob.theta)
 
 			qr_received_ant = qr_received
 
